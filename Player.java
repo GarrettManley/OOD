@@ -1,12 +1,25 @@
 
 class Player extends Person {
-	int money;
-	//player starts with $500
-	public Player() {
-		money = 500;
+	@SuppressWarnings("unused")
+	private int money;
+	private int bet;
+
+	public Player(int m) {
+		this.hand.addObserver(bo);
+		this.money = m;
+		this.personType = 1;
 	}
-	//Mutator method to set the player's hand.
-	public void setHand(CardTemplate[] hand){
-		this.hand = hand;
+	
+	public void bet(int b){
+		this.bet = b;
 	}
+	
+	public void lose(){
+		this.money-=this.bet;
+	}
+	
+	public void win(){
+		this.money+=this.bet;
+	}
+	
 }
