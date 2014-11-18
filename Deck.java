@@ -3,8 +3,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-	CardTemplate[] deck = new CardTemplate[52];
-	List<CardTemplate> shuffDeck;
+	Card[] deck = new Card[52];
+	List<Card> shuffDeck;
 	int i = 0;
 	int z = 0;
 
@@ -37,9 +37,9 @@ public class Deck {
 				z++;
 			}
 		}
-		List<CardTemplate> deckArrayList = Arrays.asList(deck);
+		List<Card> deckArrayList = Arrays.asList(deck);
 		Collections.shuffle(deckArrayList);
-		final List<CardTemplate> shuffledDeck = deckArrayList;
+		final List<Card> shuffledDeck = deckArrayList;
 		shuffDeck = shuffledDeck;
 	}
 	
