@@ -1,43 +1,31 @@
 
 
 class Person {
-	int aces = 0; //for keeping track of aces
-	CardTemplate[] hand = new CardTemplate[14];
-	int place = 0; //the latest free space in the hand
-	int total = 0; //Used to hold the total value of the cards drawn so far.
-	//Puts a card in the person's hand.
-	public void hit(CardTemplate c) {
-		hand[place] = c;
-		place++;
-		total += c.getNumValue();
-		
-		//for handling ace double-value
-		if(c.getNumValue() == 11)
-			aces++;
-		if(total > 21 && aces > 0) {
-			total = total - 10;
-			aces--;
+	
+	int personType=0;
+	Hand hand = new Hand(personType);
+	BustObserver bo = new BustObserver();	
+	
+	public void hit(Card c) {
+		Player p = (Player) this;
+		hand.addCard(c);
+		if(hand.isBust){
+			if(personType == 1){
+				p.lose();
+			}
+			else {
+				p.win();
+			}
 		}
 	}
 	//Place holder for the stand method.
 	public void stand(){
-		
-	}
-	//Prints out the player or dealers hand.
-	public void printHand(){
-		for(int i = 0; i < place; i++){
-			System.out.print(hand[i].getValue() + hand[i].getSuite() + " ");
-		}
-		System.out.print("\n");
-	}
-	//Returns the total of the person's hand.
-	public int getTotal(){
-		return total;
+		//When all players stand, the game is then over and the victory is then assessed
 	}
 	
-	public CardTemplate[] getHand(){
-		return hand;
-	}
+//	public Hand getHand(){
+//		return this.hand.getHand();
+//	}
 	
 }
 
