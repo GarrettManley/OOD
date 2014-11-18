@@ -1,5 +1,5 @@
 
-public abstract class CardTemplate {
+public abstract class Card {
 	public final void makeCard(int v){
 		assignSuite();
 		assignValue(v);
