@@ -1,6 +1,6 @@
+import javax.swing.JOptionPane;
 
 class Player extends Person {
-	@SuppressWarnings("unused")
 	private int money;
 	private int bet;
 
@@ -9,17 +9,22 @@ class Player extends Person {
 		this.money = m;
 		this.personType = 1;
 	}
-	
-	public void bet(int b){
+
+	public void bet(int b) {
 		this.bet = b;
+		while (this.bet > this.money) {
+			this.bet = Integer.parseInt(JOptionPane.showInputDialog(null,
+					"Please enter a bet amount less than $" + this.money,
+					"Invalid Bet", 0));
+		}
 	}
-	
-	public void lose(){
-		this.money-=this.bet;
+
+	public void lose() {
+		this.money -= this.bet;
 	}
-	
-	public void win(){
-		this.money+=this.bet;
+
+	public void win() {
+		this.money += this.bet;
 	}
-	
+
 }
