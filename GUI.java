@@ -1,10 +1,10 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
-
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
@@ -32,6 +32,7 @@ public class GUI {
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private final Action action_2 = new SwingAction_2();
+	private final Action action_3 = new SwingAction_3();
 
 	protected Dealer dealer = new Dealer();
 	protected String dealerCards;
@@ -47,6 +48,7 @@ public class GUI {
 	protected JLabel lblPlayerCards;
 	protected JLabel lblDealerCards;
 	protected JLabel lblPlayerValue;
+	protected JButton btnNewGame;
 
 	/**
 	 * Launch the application.
@@ -98,6 +100,16 @@ public class GUI {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+
+		btnNewGame = new JButton("NEW GAME");
+		btnNewGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewGame.setAction(action_3);
+		South.add(btnNewGame);
+		btnNewGame.setVisible(false);
+
 		button_Stand.setAction(action_2);
 		South.add(button_Stand);
 		button_Stand.setVisible(false);
@@ -232,9 +244,11 @@ public class GUI {
 			lblPlayerValue
 					.setText(Integer.toString(player.hand.getHandValue()));
 			if (player.hand.isBust == true) {
-				JOptionPane.showMessageDialog(null, "Player is bust");
+				// JOptionPane.showMessageDialog(null, "Player is bust");
 				button_Hit.setVisible(false);
 				button_Stand.setVisible(false);
+				btnNewGame.setVisible(true);
+				player.lose();
 			}
 		}
 	}
@@ -256,8 +270,36 @@ public class GUI {
 			lblDealerCards.setText(dealerCards);
 			lblDealerValue
 					.setText(Integer.toString(dealer.hand.getHandValue()));
-			
+
 			dealer.play();
+
+			if (dealer.hand.isBust != true && player.hand.isBust!=true) {
+				if (player.hand.getHandValue() > dealer.hand.getHandValue()) {
+					player.win();
+				} else {
+					player.lose();
+				}
+				btnNewGame.setVisible(true);
+			}
+		}
+	}
+
+	// new Game
+	@SuppressWarnings("serial")
+	private class SwingAction_3 extends AbstractAction {
+		public SwingAction_3() {
+			putValue(NAME, "New Game");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			btnNewGame.setVisible(false);
+			player = new Player(player.money);
+			dealer = new Dealer();
+			textField_Bet.setVisible(true);
+			button_Bet.setVisible(true);
+			button_Hit.setVisible(false);
+			button_Stand.setVisible(false);
 		}
 	}
 }
