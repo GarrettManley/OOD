@@ -1,8 +1,8 @@
 import javax.swing.JOptionPane;
 
 class Player extends Person {
-	private int money;
-	private int bet;
+	protected int money;
+	protected int bet;
 
 	public Player(int m) {
 		this.hand.addObserver(bo);
@@ -17,14 +17,15 @@ class Player extends Person {
 					"Please enter a bet amount less than $" + this.money,
 					"Invalid Bet", 0));
 		}
-	}
-
-	public void lose() {
 		this.money -= this.bet;
 	}
 
+	public void lose() {
+		//this.money -= this.bet;
+	}
+
 	public void win() {
-		this.money += this.bet;
+		this.money += (2*this.bet);
 	}
 
 }
