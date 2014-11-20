@@ -16,12 +16,9 @@ class Dealer extends Person {
 	
 	//Dealer will hit if the total is less than 17 and stand if it isn't. Also checks hand against the player's final hand.
 	public void play(){
-		while(this.hand.getHandValue() < 17/* && this.hand.hasAce==false*/){
+		while(this.hand.getHandValue() < 17){
 			this.deal(this);
 		}
-		/*if(this.hand.hasAce==true){
-			
-		}*/
 	}
 	
 }
