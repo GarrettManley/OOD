@@ -1,16 +1,19 @@
-
-public class Diamonds extends CardTemplate{
+public class Diamonds extends Card {
 	public int cardValue;
 	public int suite;
+
 	public void assignSuite() {
 		suite = 4;
 	}
+
 	public void assignValue(int i) {
 		cardValue = i;
 	}
-	public String getSuite(){
+
+	public String getSuite() {
 		return " of Diamonds";
 	}
+
 	public String getValue() {
 		String value = "";
 		if (cardValue == 0)
@@ -72,6 +75,5 @@ public class Diamonds extends CardTemplate{
 			value = 11;
 		return value;
 	}
-	
-	
+
 }
