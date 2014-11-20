@@ -1,5 +1,5 @@
 
-public class Clubs extends CardTemplate{
+public class Clubs extends Card{
 	public int cardValue;
 	public int suite;
 	public void assignSuite() {
