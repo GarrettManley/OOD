@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Observable;
 
-//add to github
 
 public class Hand extends Observable {
 
@@ -56,5 +55,16 @@ public class Hand extends Observable {
 	public void getAceValue() {
 
 	}
+	
+	public String getCardString(int i){
+		return (hand.get(i).getValue() + " " + hand.get(i).getSuite()); 
+	}
 
+	public int numCardsInHand(){
+		return hand.size();
+	}
+	
+	public Card getCard(int i){
+		return this.hand.get(i);
+	}
 }
