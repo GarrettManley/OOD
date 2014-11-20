@@ -21,11 +21,12 @@ class Player extends Person {
 	}
 
 	public void lose() {
-		//this.money -= this.bet;
+		JOptionPane.showMessageDialog(null,"You Lose!");
 	}
 
 	public void win() {
 		this.money += (2*this.bet);
+		JOptionPane.showMessageDialog(null, "You Win!");
 	}
 
 }
