@@ -1,30 +1,5 @@
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-
-import java.awt.BorderLayout;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import java.awt.Panel;
-import java.awt.FlowLayout;
-
-import javax.swing.JTextField;
-
-import java.awt.Dimension;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Color;
-
-import javax.swing.JOptionPane;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-
 public class GUI {
 
 	private JFrame Mainframe;
@@ -79,7 +54,7 @@ public class GUI {
 	private void initialize() {
 		Mainframe = new JFrame();
 		Mainframe.setBackground(new Color(0, 128, 0));
-		Mainframe.setBounds(200, 75, 900, 600);
+		Mainframe.setBounds(200, 75, 550, 325);
 		Mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Mainframe.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -134,12 +109,12 @@ public class GUI {
 
 		Panel TOP = new Panel();
 		Center_Center.add(TOP);
-		lblDealerCards = new JLabel("DCard1");
+		lblDealerCards = new JLabel("Dealer Cards");
 		TOP.add(lblDealerCards);
 
 		Panel Bottom = new Panel();
 		Center_Center.add(Bottom);
-		lblPlayerCards = new JLabel("Card1");
+		lblPlayerCards = new JLabel("Player Cards");
 		Bottom.add(lblPlayerCards);
 
 		Panel Center_south = new Panel();
@@ -276,6 +251,7 @@ public class GUI {
 			if (dealer.hand.isBust != true && player.hand.isBust!=true) {
 				if (player.hand.getHandValue() > dealer.hand.getHandValue()) {
 					player.win();
+					label_Money.setText("$" + Integer.toString(player.money));
 				} else {
 					player.lose();
 				}
