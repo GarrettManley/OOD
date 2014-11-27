@@ -54,7 +54,7 @@ public class GUI {
 	private void initialize() {
 		Mainframe = new JFrame();
 		Mainframe.setBackground(new Color(0, 128, 0));
-		Mainframe.setBounds(200, 75, 550, 325);
+		Mainframe.setBounds(200, 75, 720, 450);
 		Mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Mainframe.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -167,22 +167,19 @@ public class GUI {
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "Bet");
-			putValue(SHORT_DESCRIPTION, "Contols the start of the game");
+			putValue(SHORT_DESCRIPTION, "Place a bet and start the game.  Bet must be a positive integer");
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			// Enter the user's bet
-			try {
-				player.bet(Integer.parseInt(textField_Bet.getText()));
-				label_Money.setText("$" + Integer.toString(player.money));
-				textField_Bet.setVisible(false);
-				button_Bet.setVisible(false);
-				button_Hit.setVisible(true);
-				button_Stand.setVisible(true);
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null,
-						"Please enter an integer value!");
-			}
+
+			player.bet(textField_Bet.getText());
+
+			label_Money.setText("$" + Integer.toString(player.money));
+			textField_Bet.setVisible(false);
+			button_Bet.setVisible(false);
+			button_Hit.setVisible(true);
+			button_Stand.setVisible(true);
 
 			// Initialize the game by dealing initial cards
 			dealer.deal(player);
@@ -208,7 +205,7 @@ public class GUI {
 	private class SwingAction_1 extends AbstractAction {
 		public SwingAction_1() {
 			putValue(NAME, "Hit");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			putValue(SHORT_DESCRIPTION, "Add a new card to player's hand");
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -223,6 +220,7 @@ public class GUI {
 				button_Hit.setVisible(false);
 				button_Stand.setVisible(false);
 				btnNewGame.setVisible(true);
+				lblPlayerValue.setText((Integer.toString(player.hand.getHandValue()) + " - BUST!"));
 				player.lose();
 			}
 		}
@@ -233,7 +231,7 @@ public class GUI {
 	private class SwingAction_2 extends AbstractAction {
 		public SwingAction_2() {
 			putValue(NAME, "Stand");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			putValue(SHORT_DESCRIPTION, "Player is done drawing cards");
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -247,16 +245,35 @@ public class GUI {
 					.setText(Integer.toString(dealer.hand.getHandValue()));
 
 			dealer.play();
+			
+			// update dealer information being displayed
+			lblDealerValue
+					.setText(Integer.toString(dealer.hand.getHandValue()));
+			if(dealer.hand.isBust){
+				lblDealerValue
+				.setText(Integer.toString(dealer.hand.getHandValue()) + " - BUST!");
+			}
 
-			if (dealer.hand.isBust != true && player.hand.isBust!=true) {
+			for (int i = 2; i < dealer.hand.numCardsInHand(); i++) {
+				dealerCards += (", " + dealer.hand.getCardString(i));
+			}
+
+			lblDealerCards.setText(dealerCards);
+
+			if (dealer.hand.isBust != true && player.hand.isBust != true) {
 				if (player.hand.getHandValue() > dealer.hand.getHandValue()) {
 					player.win();
 					label_Money.setText("$" + Integer.toString(player.money));
 				} else {
 					player.lose();
 				}
-				btnNewGame.setVisible(true);
+			} else {
+				if (dealer.hand.isBust) {
+					player.win();
+					label_Money.setText("$" + Integer.toString(player.money));
+				}
 			}
+			btnNewGame.setVisible(true);
 		}
 	}
 
@@ -265,7 +282,7 @@ public class GUI {
 	private class SwingAction_3 extends AbstractAction {
 		public SwingAction_3() {
 			putValue(NAME, "New Game");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			putValue(SHORT_DESCRIPTION, "Start a new game");
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -276,6 +293,13 @@ public class GUI {
 			button_Bet.setVisible(true);
 			button_Hit.setVisible(false);
 			button_Stand.setVisible(false);
+
+			lblPlayerValue.setText("0");
+			lblDealerValue.setText("0");
+			lblPlayerCards.setText("Player Cards");
+			lblDealerCards.setText("Dealer Cards");
+			
+			label_Money.setText(Integer.toString(player.money));
 		}
 	}
 }
