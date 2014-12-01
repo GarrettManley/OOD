@@ -1,9 +1,19 @@
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.URL;
+
+import javax.swing.*;
+import javax.sound.*;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
+import sun.audio.*;
 
 public class GUI {
 
 	private JFrame Mainframe;
-
+	
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private final Action action_2 = new SwingAction_2();
@@ -13,22 +23,41 @@ public class GUI {
 	protected String dealerCards;
 	protected Player player = new Player(10000);
 	protected String playerCards;
-
+	  protected JLabel DealerCard1 = new JLabel("");
+	  protected JLabel DealerCard2 = new JLabel("");
+	  protected	JLabel DealerCard3 = new JLabel("");
+	  protected JLabel DealerCard4 = new JLabel("");
+	  protected JLabel DealerCard5 = new JLabel("");
+	  protected JLabel DealerCard6 = new JLabel("");
+	  protected JLabel DealerCard7 = new JLabel("");
+	  protected JLabel PlayerCard1 = new JLabel("");
+	  protected JLabel PlayerCard2 = new JLabel("");
+	  protected JLabel PlayerCard3 = new JLabel("");
+	  protected JLabel PlayerCard4 = new JLabel("");
+	  protected JLabel PlayerCard5 = new JLabel("");
+	  protected JLabel PlayerCard6 = new JLabel("");
+	  protected JLabel PlayerCard7 = new JLabel("");
+	  protected JLabel DealerTemp = new JLabel("");
+	  protected JLabel PlayerTemp = new JLabel("");
 	protected JLabel lblDealerValue;
 	protected JLabel label_Money;
 	protected JTextField textField_Bet;
 	protected JButton button_Bet;
 	protected JButton button_Stand;
 	protected JButton button_Hit;
-	protected JLabel lblPlayerCards;
-	protected JLabel lblDealerCards;
 	protected JLabel lblPlayerValue;
 	protected JButton btnNewGame;
+    
+	
+	
 
+	
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -53,6 +82,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		Mainframe = new JFrame();
+		Mainframe.getContentPane().setBackground(new Color(50, 205, 50));
 		Mainframe.setBackground(new Color(0, 128, 0));
 		Mainframe.setBounds(200, 75, 720, 450);
 		Mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,33 +90,40 @@ public class GUI {
 
 		Panel South = new Panel();
 		Mainframe.getContentPane().add(South, BorderLayout.SOUTH);
-		South.setLayout(new GridLayout(1, 3, 0, 0));
+		South.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		button_Hit = new JButton("hit");
 		button_Hit.setVisible(false);
+		button_Hit.setFont(new Font("SansSerif", button_Hit.getFont().getStyle(), 12));
+		button_Hit.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		button_Hit.setAction(action_1);
 		button_Hit.setMinimumSize(new Dimension(20, 20));
 		button_Hit.setMaximumSize(new Dimension(20, 20));
-		button_Hit.setPreferredSize(new Dimension(100, 20));
+		button_Hit.setPreferredSize(new Dimension(100, 23));
 		South.add(button_Hit);
 
 		button_Stand = new JButton("Stand");
+		button_Stand.setFont(new Font("SansSerif", button_Hit.getFont().getStyle(), 12));
+		button_Stand.setPreferredSize(new Dimension(100, 23));
 		button_Stand.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 
-		btnNewGame = new JButton("NEW GAME");
-		btnNewGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewGame.setAction(action_3);
-		South.add(btnNewGame);
-		btnNewGame.setVisible(false);
-
 		button_Stand.setAction(action_2);
 		South.add(button_Stand);
+		
+				btnNewGame = new JButton("NEW GAME");
+				btnNewGame.setFont(new Font("SansSerif", button_Hit.getFont().getStyle(), 12));
+				South.add(btnNewGame);
+				btnNewGame.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+				btnNewGame.setPreferredSize(new Dimension(100, 23));
+				btnNewGame.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
+				btnNewGame.setAction(action_3);
+				btnNewGame.setVisible(false);
 		button_Stand.setVisible(false);
 
 		Panel West = new Panel();
@@ -99,54 +136,143 @@ public class GUI {
 
 		Panel North = new Panel();
 		Mainframe.getContentPane().add(North, BorderLayout.NORTH);
+		
+				JLabel lblPlayerMoney = new JLabel("Player Money:");
+				lblPlayerMoney.setFont(new Font("SansSerif", Font.BOLD, 13));
+				North.add(lblPlayerMoney);
+				
+						label_Money = new JLabel("$$$");
+						label_Money.setFont(new Font("SansSerif", Font.BOLD, 13));
+						North.add(label_Money);
+						label_Money.setText("$" + Integer.toString(player.money));
 
 		Panel Center = new Panel();
 		Mainframe.getContentPane().add(Center, BorderLayout.CENTER);
 		Center.setLayout(new BorderLayout(0, 0));
 		Panel Center_Center = new Panel();
 		Center.add(Center_Center, BorderLayout.CENTER);
-		Center_Center.setLayout(new GridLayout(2, 1, 0, 0));
+		Center_Center.setLayout(new BorderLayout(0, 0));
 
-		Panel TOP = new Panel();
-		Center_Center.add(TOP);
-		lblDealerCards = new JLabel("Dealer Cards");
-		TOP.add(lblDealerCards);
+		Panel Top = new Panel();
+		Center_Center.add(Top,BorderLayout.NORTH);
+		
+				JLabel lblDealerHandValueTag = new JLabel("Dealer Hand Value:");
+				lblDealerHandValueTag.setFont(new Font("SansSerif", Font.PLAIN, 11));
+				Top.add(lblDealerHandValueTag);
+				lblDealerValue = new JLabel();
+				lblDealerValue.setFont(new Font("SansSerif", Font.PLAIN, 11));
+				Top.add(lblDealerValue);
+				lblDealerValue.setText("0");
 
 		Panel Bottom = new Panel();
-		Center_Center.add(Bottom);
-		lblPlayerCards = new JLabel("Player Cards");
-		Bottom.add(lblPlayerCards);
+		Center_Center.add(Bottom,BorderLayout.SOUTH);
+		
+				JLabel lblPlayerHandValueTag = new JLabel("Player Hand Value:");
+				lblPlayerHandValueTag.setFont(new Font("SansSerif", Font.PLAIN, 11));
+				Bottom.add(lblPlayerHandValueTag);
+				
+						lblPlayerValue = new JLabel("0");
+						lblPlayerValue.setFont(new Font("SansSerif", Font.PLAIN, 11));
+						Bottom.add(lblPlayerValue);
+		
+		Panel CardArea = new Panel();
+		Center_Center.add(CardArea, BorderLayout.CENTER);
+		CardArea.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		Panel CardAreaTop = new Panel();
+		CardArea.add(CardAreaTop);
+		CardAreaTop.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		
+		DealerTemp.setIcon(null);
+		DealerTemp.setVisible(false);
+		CardAreaTop.add(DealerTemp);
+		
+
+		DealerCard1.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard1);
+		
+		
+		DealerCard2.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard2);
+		
+	;
+		DealerCard3.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard3);
+		
+		
+		DealerCard4.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard4);
+		
+		
+		DealerCard5.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard5);
+		
+	
+		DealerCard6.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard6);
+		
+		
+		DealerCard7.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaTop.add(DealerCard7);
+		
+		Panel CardAreaBottom = new Panel();
+		CardArea.add(CardAreaBottom);
+		CardAreaBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		
+		PlayerTemp.setIcon(null);
+		PlayerTemp.setVisible(false);
+		CardAreaBottom.add(PlayerTemp);
+		
+		
+		PlayerCard1.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard1);
+		
+	
+		PlayerCard2.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard2);
+		
+		
+		PlayerCard3.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard3);
+		
+		
+		PlayerCard4.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard4);
+		
+		
+		PlayerCard5.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard5);
+		
+		
+		PlayerCard6.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard6);
+		
+		
+		PlayerCard7.setIcon(new ImageIcon("C:\\Users\\lg01570\\workspace\\blackjack\\src\\blank.png")); //THIS WILL NEED TO BE CHANGED!!!!!!!
+		CardAreaBottom.add(PlayerCard7);
 
 		Panel Center_south = new Panel();
 		Center.add(Center_south, BorderLayout.SOUTH);
-
-		// Bet Button
-		button_Bet = new JButton("bet");
-		button_Bet.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-
-		JLabel lblPlayerHandValueTag = new JLabel("Player Hand Value:");
-		Center_south.add(lblPlayerHandValueTag);
-
-		lblPlayerValue = new JLabel("0");
-		Center_south.add(lblPlayerValue);
+		
+				// Bet Button
+				button_Bet = new JButton("bet");
+				button_Bet.setFont(new Font("SansSerif", button_Hit.getFont().getStyle(), 12));
+				button_Bet.setPreferredSize(new Dimension(100, 23));
+				button_Bet.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
+				button_Bet.setAction(action);
+				Center_south.add(button_Bet);
+				button_Bet.setVerticalAlignment(SwingConstants.BOTTOM);
 
 		textField_Bet = new JTextField();
+		textField_Bet.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		textField_Bet.setText("0");
 		Center_south.add(textField_Bet);
 		textField_Bet.setColumns(10);
-		button_Bet.setAction(action);
-		Center_south.add(button_Bet);
-		button_Bet.setVerticalAlignment(SwingConstants.BOTTOM);
-
-		JLabel lblPlayerMoney = new JLabel("Player Money:");
-		Center_south.add(lblPlayerMoney);
-
-		label_Money = new JLabel("$$$");
-		Center_south.add(label_Money);
-		label_Money.setText("$" + Integer.toString(player.money));
 
 		Panel Center_West = new Panel();
 		Center.add(Center_West, BorderLayout.WEST);
@@ -154,12 +280,6 @@ public class GUI {
 		Center.add(Center_East, BorderLayout.EAST);
 		Panel Center_North = new Panel();
 		Center.add(Center_North, BorderLayout.NORTH);
-
-		JLabel lblDealerHandValueTag = new JLabel("Dealer Hand Value:");
-		Center_North.add(lblDealerHandValueTag);
-		lblDealerValue = new JLabel();
-		Center_North.add(lblDealerValue);
-		lblDealerValue.setText("0");
 	}
 
 	// Betting and starting the game
@@ -183,15 +303,16 @@ public class GUI {
 
 			// Initialize the game by dealing initial cards
 			dealer.deal(player);
+			
 			dealer.deal(dealer);
 			dealer.deal(player);
 			dealer.deal(dealer);
 
 			playerCards = (player.hand.getCardString(0) + ", " + player.hand
 					.getCardString(1));
-			lblPlayerCards.setText(playerCards);
+			//lblPlayerCards.setText(playerCards);
 			dealerCards = ("Unknown, " + dealer.hand.getCardString(1));
-			lblDealerCards.setText(dealerCards);
+			//lblDealerCards.setText(dealerCards);
 
 			lblPlayerValue
 					.setText(Integer.toString(player.hand.getHandValue()));
@@ -212,11 +333,12 @@ public class GUI {
 			dealer.deal(player);
 			playerCards += (", " + player.hand.getCardString((player.hand
 					.numCardsInHand() - 1)));
-			lblPlayerCards.setText(playerCards);
-			lblPlayerValue
-					.setText(Integer.toString(player.hand.getHandValue()));
+			PlayerCard7.setIcon(PlayerCard6.getIcon());
+			
+			//lblPlayerCards.setText(playerCards);
+			lblPlayerValue.setText(Integer.toString(player.hand.getHandValue()));
 			if (player.hand.isBust == true) {
-				// JOptionPane.showMessageDialog(null, "Player is bust");
+				 JOptionPane.showMessageDialog(null, "Player is bust");
 				button_Hit.setVisible(false);
 				button_Stand.setVisible(false);
 				btnNewGame.setVisible(true);
@@ -240,13 +362,13 @@ public class GUI {
 
 			dealerCards = (dealer.hand.getCardString(0) + ", " + dealer.hand
 					.getCardString(1));
-			lblDealerCards.setText(dealerCards);
+			//lblDealerCards.setText(dealerCards);
 			lblDealerValue
 					.setText(Integer.toString(dealer.hand.getHandValue()));
 
 			dealer.play();
 			
-			// update dealer information being displayed
+			 //update dealer information being displayed
 			lblDealerValue
 					.setText(Integer.toString(dealer.hand.getHandValue()));
 			if(dealer.hand.isBust){
@@ -258,7 +380,7 @@ public class GUI {
 				dealerCards += (", " + dealer.hand.getCardString(i));
 			}
 
-			lblDealerCards.setText(dealerCards);
+			//lblDealerCards.setText(dealerCards);
 
 			if (dealer.hand.isBust != true && player.hand.isBust != true) {
 				if (player.hand.getHandValue() > dealer.hand.getHandValue()) {
@@ -296,8 +418,8 @@ public class GUI {
 
 			lblPlayerValue.setText("0");
 			lblDealerValue.setText("0");
-			lblPlayerCards.setText("Player Cards");
-			lblDealerCards.setText("Dealer Cards");
+			//lblPlayerCards.setText("Player Cards");
+		//lblDealerCards.setText("Dealer Cards");
 			
 			label_Money.setText(Integer.toString(player.money));
 		}
