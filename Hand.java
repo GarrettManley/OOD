@@ -9,7 +9,7 @@ public class Hand extends Observable {
 	protected boolean isBust = false;
 	protected boolean hasAce = false;
 
-	protected ArrayList<Integer> aceIndex = new ArrayList<Integer>();
+	protected int aceIndex = 0;
 
 	public Hand(int pt) {
 		this.personType = pt;
@@ -31,7 +31,7 @@ public class Hand extends Observable {
 	public void addCard(Card c) {
 		this.hand.add(c);
 		if (c.getValue() == "Ace") {
-			aceIndex.add(this.hand.size());
+			aceIndex++;
 			this.hasAce = true;
 		}
 		setChanged();
@@ -48,6 +48,14 @@ public class Hand extends Observable {
 		int value = 0;
 		for (int i = 0; i < this.hand.size(); i++) {
 			value += this.hand.get(i).getNumValue();
+		}
+		if(value > 21 && hasAce) {
+			for(int i = 0; i < aceIndex; i++) {
+				value = value - 10;
+				if(value <= 21)
+					break;
+			}
+			
 		}
 		return value;
 	}
