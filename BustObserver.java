@@ -8,26 +8,17 @@ public class BustObserver implements Observer {
 	BustObserver() {
 	}
 
+	// Need to call player win or dealer win and reset the GUI if either of
+	// these goes bust.
+	// Possibly implement a second observer within the GUI to watch for this and
+	// call the new game when this happens
+
 	@Override
 	public void update(Observable obj, Object arg) {
 		Hand hand = (Hand) obj;
-		if (hand.hasAce = false) {
-			if (hand.getHandValue() > 21) {
-				hand.isBust = true;
-			}
-		} else {
-			if (hand.getHandValue() > 21) {
-				hand.isBust = true;
-				int count = 1;
-				for (int i = 0; i < hand.aceIndex.size(); i++) {
-					if (hand.getHandValue() - (10 * count) < 21) {
-						hand.isBust = false;
-						break;
-					}
-				}
-			}
+		if (hand.getHandValue() > 21) {
+			hand.isBust = true;
 		}
-
 	}
 
 }
