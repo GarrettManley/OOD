@@ -9,7 +9,7 @@ public class Spades extends Card{
 		cardValue = i;
 	}
 	public String getSuite(){
-		return " of Spades";
+		return "Spade";
 	}
 	public String getValue() {
 		String value = "";
