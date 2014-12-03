@@ -9,6 +9,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 import sun.audio.*;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class GUI {
 
@@ -23,22 +27,8 @@ public class GUI {
 	protected String dealerCards;
 	protected Player player = new Player(10000);
 	protected String playerCards;
-	  protected JLabel DealerCard1 = new JLabel("");
-	  protected JLabel DealerCard2 = new JLabel("");
-	  protected	JLabel DealerCard3 = new JLabel("");
-	  protected JLabel DealerCard4 = new JLabel("");
-	  protected JLabel DealerCard5 = new JLabel("");
-	  protected JLabel DealerCard6 = new JLabel("");
-	  protected JLabel DealerCard7 = new JLabel("");
-	  protected JLabel PlayerCard1 = new JLabel("");
-	  protected JLabel PlayerCard2 = new JLabel("");
-	  protected JLabel PlayerCard3 = new JLabel("");
-	  protected JLabel PlayerCard4 = new JLabel("");
-	  protected JLabel PlayerCard5 = new JLabel("");
-	  protected JLabel PlayerCard6 = new JLabel("");
-	  protected JLabel PlayerCard7 = new JLabel("");
-	  protected JLabel DealerTemp = new JLabel("");
-	  protected JLabel PlayerTemp = new JLabel("");
+	protected JLabel DealerCard1 = new JLabel("");
+	  
 	protected JLabel lblDealerValue;
 	protected JLabel label_Money;
 	protected JTextField textField_Bet;
@@ -50,6 +40,35 @@ public class GUI {
     
 	
 	
+	protected JLabel DealerCard2 = new JLabel("");
+	  protected	JLabel DealerCard3 = new JLabel("");
+	  protected JLabel DealerCard4 = new JLabel("");
+	  protected JLabel DealerCard5 = new JLabel("");
+	  protected JLabel DealerCard6 = new JLabel("");
+	  protected JLabel DealerCard7 = new JLabel("");
+	  protected JLabel DealerCard8 = new JLabel("");
+	  protected JLabel DealerCard9 = new JLabel("");
+	  protected JLabel DealerCard10 = new JLabel("");
+	  protected JLabel DealerCard11 = new JLabel("");
+	  protected JLabel PlayerCard1 = new JLabel("");
+	  protected JLabel PlayerCard2 = new JLabel("");
+	  protected JLabel PlayerCard3 = new JLabel("");
+	  protected JLabel PlayerCard4 = new JLabel("");
+	  protected JLabel PlayerCard5 = new JLabel("");
+	  protected JLabel PlayerCard6 = new JLabel("");
+	  protected JLabel PlayerCard7 = new JLabel("");
+	  protected JLabel PlayerCard8 = new JLabel("");
+	  protected JLabel PlayerCard9 = new JLabel("");
+	  protected JLabel PlayerCard10 = new JLabel("");
+	  protected JLabel PlayerCard11 = new JLabel("");
+	  protected JLabel PlayerTemp = new JLabel("");
+	
+	JLabel[] PCards = new JLabel[11];
+
+	JLabel[] DCards = new JLabel[11];
+	private final JLayeredPane layeredPane = new JLayeredPane();
+	private final JLabel label = new JLabel("");
+	private final JLayeredPane layeredPane_1 = new JLayeredPane();
 
 	
 	
@@ -156,10 +175,12 @@ public class GUI {
 		Panel Top = new Panel();
 		Center_Center.add(Top,BorderLayout.NORTH);
 		
-				JLabel lblDealerHandValueTag = new JLabel("Dealer Hand Value:");
+				JLabel lblDealerHandValueTag = new JLabel("Dealer Hand Value:   ");
+				lblDealerHandValueTag.setBackground(new Color(255, 255, 0));
 				lblDealerHandValueTag.setFont(new Font("SansSerif", Font.PLAIN, 11));
 				Top.add(lblDealerHandValueTag);
 				lblDealerValue = new JLabel();
+				lblDealerValue.setBackground(new Color(255, 255, 0));
 				lblDealerValue.setFont(new Font("SansSerif", Font.PLAIN, 11));
 				Top.add(lblDealerValue);
 				lblDealerValue.setText("0");
@@ -179,79 +200,186 @@ public class GUI {
 		Center_Center.add(CardArea, BorderLayout.CENTER);
 		CardArea.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		Panel CardAreaTop = new Panel();
-		CardArea.add(CardAreaTop);
-		CardAreaTop.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		CardArea.add(layeredPane_1);
+		layeredPane_1.setLayout(null);
+        
+        DCards[10]=DealerCard11;
+        DealerCard11.setVisible(false);
+        DealerCard11.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard11.setSize(new Dimension(72, 96));
+        DealerCard11.setBounds(539, 22, 72, 96);
+        layeredPane_1.add(DealerCard11);
+        DealerCard11.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[9]=DealerCard10;
+        DealerCard10.setVisible(false);
+        DealerCard10.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard10.setSize(new Dimension(72, 96));
+        DealerCard10.setBounds(507, 22, 72, 96);
+        layeredPane_1.add(DealerCard10);
+        DealerCard10.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[8]=DealerCard9;
+        DealerCard9.setVisible(false);
+        DealerCard9.setBounds(469, 22, 72, 96);
+        layeredPane_1.add(DealerCard9);
+        DealerCard9.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[7]=DealerCard8;
+        DealerCard8.setVisible(false);
+        DealerCard8.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard8.setSize(new Dimension(72, 96));
+        DealerCard8.setBounds(437, 22, 72, 96);
+        layeredPane_1.add(DealerCard8);
+        DealerCard8.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[6]=DealerCard7;
+        DealerCard7.setVisible(false);
+        DealerCard7.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard7.setSize(new Dimension(72, 96));
+        DealerCard7.setBounds(405, 22, 72, 96);
+        layeredPane_1.add(DealerCard7);
+        DealerCard7.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[5]=DealerCard6;
+        DealerCard6.setVisible(false);
+        DealerCard6.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard6.setSize(new Dimension(72, 96));
+        DealerCard6.setBounds(371, 22, 72, 96);
+        layeredPane_1.add(DealerCard6);
+        DealerCard6.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[4]=DealerCard5;
+        DealerCard5.setVisible(false);
+        DealerCard5.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard5.setSize(new Dimension(72, 96));
+        DealerCard5.setBounds(337, 22, 72, 96);
+        layeredPane_1.add(DealerCard5);
+        DealerCard5.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[3]=DealerCard4;
+        DealerCard4.setVisible(false);
+        DealerCard4.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard4.setSize(new Dimension(72, 96));
+        DealerCard4.setBounds(305, 22, 72, 96);
+        layeredPane_1.add(DealerCard4);
+        DealerCard4.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+	    DCards[2]=DealerCard3;
+	    DealerCard3.setVisible(false);
+	    DealerCard3.setBounds(new Rectangle(0, 0, 72, 96));
+	    DealerCard3.setSize(new Dimension(72, 96));
+	    DealerCard3.setBounds(269, 22, 72, 96);
+	    layeredPane_1.add(DealerCard3);
+	    DealerCard3.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+        
+        DCards[1]=DealerCard2;
+        DealerCard2.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard2.setSize(new Dimension(72, 96));
+        DealerCard2.setBounds(237, 22, 72, 96);
+        layeredPane_1.add(DealerCard2);
+        DealerCard2.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
 		
+        DCards[0]=DealerCard1;
+        DealerCard1.setBounds(new Rectangle(0, 0, 72, 96));
+        DealerCard1.setSize(new Dimension(72, 96));
+        DealerCard1.setBounds(202, 22, 72, 96);
+        layeredPane_1.add(DealerCard1);
+        DealerCard1.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
 		
-		DealerTemp.setIcon(null);
-		DealerTemp.setVisible(false);
-		CardAreaTop.add(DealerTemp);
-		
-
-		DealerCard1.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard1);
-		
-		
-		DealerCard2.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard2);
-		
-	;
-		DealerCard3.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard3);
-		
-		
-		DealerCard4.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard4);
-		
-		
-		DealerCard5.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard5);
-		
-	
-		DealerCard6.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard6);
-		
-		
-		DealerCard7.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaTop.add(DealerCard7);
-		
-		Panel CardAreaBottom = new Panel();
-		CardArea.add(CardAreaBottom);
-		CardAreaBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		CardArea.add(layeredPane);
+		layeredPane.setLayout(null);
+		PlayerTemp.setBounds(0, 64, 0, 0);
+		layeredPane.add(PlayerTemp);
 		
 		
 		PlayerTemp.setIcon(null);
+		
+		PCards[10]=PlayerCard11;
+		PlayerCard11.setVisible(false);
+		PlayerCard11.setLocation(541, 2);
+		PlayerCard11.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard11);
+		PlayerCard11.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/5Spade.png")));
+		
+		PCards[9]=PlayerCard10;
+		PlayerCard10.setVisible(false);
+		PlayerCard10.setLocation(508, 2);
+		PlayerCard10.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard10);
+		PlayerCard10.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/3Spade.png")));
+		
+		PCards[8]=PlayerCard9;
+		PlayerCard9.setVisible(false);
+		PlayerCard9.setLocation(471, 2);
+		PlayerCard9.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard9);
+		PlayerCard9.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/2Heart.png")));
+		
+		PCards[7]=PlayerCard8;
+		PlayerCard8.setVisible(false);
+		PlayerCard8.setLocation(437, 2);
+		PlayerCard8.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard8);
+		PlayerCard8.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/QueenDiamond.png")));
+		
+		PCards[6]=PlayerCard7;
+		PlayerCard7.setVisible(false);
+		PlayerCard7.setLocation(403, 2);
+		PlayerCard7.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard7);
+		PlayerCard7.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/JackClub.png")));
+		
+		PCards[5]=PlayerCard6;
+		PlayerCard6.setVisible(false);
+		PlayerCard6.setLocation(372, 2);
+		PlayerCard6.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard6);
+		PlayerCard6.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/6Diamond.png")));
+		
+		PCards[4]=PlayerCard5;
+		PlayerCard5.setVisible(false);
+		PlayerCard5.setLocation(338, 2);
+		PlayerCard5.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard5);
+		PlayerCard5.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/10Club.png")));
+		
+		PCards[3]=PlayerCard4;
+		PlayerCard4.setVisible(false);
+		PlayerCard4.setLocation(307, 2);
+		PlayerCard4.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard4);
+		PlayerCard4.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/7Heart.png")));
+		layeredPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{PlayerTemp, PlayerCard11, PlayerCard10, PlayerCard9, PlayerCard8, PlayerCard6, PlayerCard7, PlayerCard5, PlayerCard4, PlayerCard3, PlayerCard2, PlayerCard1, label}));
+		
+		PCards[2]=PlayerCard3;
+		PlayerCard3.setVisible(false);
+		PlayerCard3.setLocation(271, 2);
+		PlayerCard3.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard3);
+		PlayerCard3.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/6Heart.png")));
+		
+		PCards[1]=PlayerCard2;
+		PlayerCard2.setLocation(238, 2);
+		PlayerCard2.setBorder(null);
+		PlayerCard2.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard2);
+		PlayerCard2.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+		
+		PCards[0]=PlayerCard1;
+		PlayerCard1.setLocation(202, 2);
+		PlayerCard1.setBorder(null);
+		PlayerCard1.setSize(new Dimension(72, 96));
+		layeredPane.add(PlayerCard1);
+		PlayerCard1.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+		label.setSize(new Dimension(72, 96));
+		label.setBounds(602, 20, 72, 96);
+		label.setSize(new Dimension(72, 96));
+		label.setBounds(602, 20, 72, 96);
+		
+		
+		layeredPane.add(label);
 		PlayerTemp.setVisible(false);
-		CardAreaBottom.add(PlayerTemp);
-		
-		
-		PlayerCard1.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard1);
-		
-	
-		PlayerCard2.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard2);
-		
-		
-		PlayerCard3.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard3);
-		
-		
-		PlayerCard4.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard4);
-		
-		
-		PlayerCard5.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard5);
-		
-		
-		PlayerCard6.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard6);
-		
-		
-		PlayerCard7.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/blank.png"))); //THIS WILL NEED TO BE CHANGED!!!!!!!
-		CardAreaBottom.add(PlayerCard7);
 
 		Panel Center_south = new Panel();
 		Center.add(Center_south, BorderLayout.SOUTH);
@@ -282,6 +410,33 @@ public class GUI {
 		Center.add(Center_North, BorderLayout.NORTH);
 	}
 
+	public void end()
+	{
+		DealerCard1.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+		 DealerCard2.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+		 DealerCard3.setVisible(false);
+		 DealerCard4.setVisible(false);
+		 DealerCard5.setVisible(false);
+		 DealerCard6.setVisible(false);
+		 DealerCard7.setVisible(false);
+		 DealerCard8.setVisible(false);
+		 DealerCard9.setVisible(false);
+		 DealerCard10.setVisible(false);
+		 DealerCard11.setVisible(false);
+		 
+		 PlayerCard1.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+		 PlayerCard2.setIcon(new ImageIcon(GUI.class.getResource("/CardImages/Hidden.png")));
+		 
+		 PlayerCard3.setVisible(false);
+		 PlayerCard4.setVisible(false);
+		 PlayerCard5.setVisible(false);
+		 PlayerCard6.setVisible(false);
+		 PlayerCard7.setVisible(false);
+		 PlayerCard8.setVisible(false);
+		 PlayerCard9.setVisible(false);
+		 PlayerCard10.setVisible(false);
+		 PlayerCard11.setVisible(false);
+	}
 	// Betting and starting the game
 	@SuppressWarnings("serial")
 	private class SwingAction extends AbstractAction {
@@ -300,13 +455,24 @@ public class GUI {
 			button_Bet.setVisible(false);
 			button_Hit.setVisible(true);
 			button_Stand.setVisible(true);
-
+            
 			// Initialize the game by dealing initial cards
 			dealer.deal(player);
+			PCards[player.hand.numCardsInHand()-1].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + player.hand.getCardString(player.hand.numCardsInHand()-1) +".png")));
 			dealer.deal(dealer);
+			
+			
+			
 			dealer.deal(player);
+			PCards[player.hand.numCardsInHand()-1].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + player.hand.getCardString(player.hand.numCardsInHand()-1) +".png")));
 			dealer.deal(dealer);
-
+			
+			
+			//look at card suite and value, then assign the appropriate image to the appropriate area
+			DCards[dealer.hand.numCardsInHand()-1].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + dealer.hand.getCardString(dealer.hand.numCardsInHand()-1) +".png")));
+			PCards[player.hand.numCardsInHand()-1].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + player.hand.getCardString(player.hand.numCardsInHand()-1) +".png")));
+			
+			
 			playerCards = (player.hand.getCardString(0) + ", " + player.hand
 					.getCardString(1));
 			//lblPlayerCards.setText(playerCards);
@@ -317,6 +483,8 @@ public class GUI {
 					.setText(Integer.toString(player.hand.getHandValue()));
 			lblDealerValue.setText(Integer.toString(dealer.hand.getHandValue()
 					- dealer.hand.getCard(0).getNumValue()));
+			
+			DCards[dealer.hand.numCardsInHand()-1].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + dealer.hand.getCardString(dealer.hand.numCardsInHand()-1) +".png")));
 		}
 	}
 
@@ -324,24 +492,39 @@ public class GUI {
 	@SuppressWarnings("serial")
 	private class SwingAction_1 extends AbstractAction {
 		public SwingAction_1() {
+		
 			putValue(NAME, "Hit");
 			putValue(SHORT_DESCRIPTION, "Add a new card to player's hand");
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			dealer.deal(player);
+			PCards[player.hand.numCardsInHand()-1].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + player.hand.getCardString(player.hand.numCardsInHand()-1) +".png")));
+			PCards[player.hand.numCardsInHand()-1].setVisible(true);
 			playerCards += (", " + player.hand.getCardString((player.hand
 					.numCardsInHand() - 1)));
 		//	lblPlayerCards.setText(playerCards);
 			lblPlayerValue
 					.setText(Integer.toString(player.hand.getHandValue()));
 			if (player.hand.isBust == true) {
+				//show the hidden card and update the shown value of the dealers hand.
+				lblDealerValue.setText(Integer.toString(dealer.hand.getHandValue()));
+				DCards[0].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + dealer.hand.getCardString(0) +".png")));
 				// JOptionPane.showMessageDialog(null, "Player is bust");
 				button_Hit.setVisible(false);
 				button_Stand.setVisible(false);
 				btnNewGame.setVisible(true);
 				lblPlayerValue.setText((Integer.toString(player.hand.getHandValue()) + " - BUST!"));
+				
 				player.lose();
+				
+				//reseting board after game
+				end();
+			
+				
+				
+				
+				
 			}
 		}
 	}
@@ -382,14 +565,35 @@ public class GUI {
 
 			if (dealer.hand.isBust != true && player.hand.isBust != true) {
 				if (player.hand.getHandValue() > dealer.hand.getHandValue()) {
+					//show the hidden card and update the shown value of the dealers hand.
+					lblDealerValue.setText(Integer.toString(dealer.hand.getHandValue()));
+					DCards[0].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + dealer.hand.getCardString(0) +".png")));
+					
 					player.win();
+			
+					end();
+					
 					label_Money.setText("$" + Integer.toString(player.money));
 				} else {
+					
+					//show the hidden card and update the shown value of the dealers hand.
+					lblDealerValue.setText(Integer.toString(dealer.hand.getHandValue()));
+					DCards[0].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + dealer.hand.getCardString(0) +".png")));
 					player.lose();
+					
+					end();
 				}
 			} else {
 				if (dealer.hand.isBust) {
+					
+					//show the hidden card and update the shown value of the dealers hand.
+					lblDealerValue.setText(Integer.toString(dealer.hand.getHandValue()));
+					DCards[0].setIcon(new ImageIcon(GUI.class.getResource("/CardImages/" + dealer.hand.getCardString(0) +".png")));
+					
 					player.win();
+					
+					end();
+					
 					label_Money.setText("$" + Integer.toString(player.money));
 				}
 			}
