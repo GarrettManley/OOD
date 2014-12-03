@@ -9,7 +9,7 @@ public class Clubs extends Card{
 		cardValue = i;
 	}
 	public String getSuite(){
-		return " of Clubs";
+		return "Club";
 	}
 	public String getValue() {
 		String value = "";
