@@ -11,7 +11,7 @@ public class Diamonds extends Card {
 	}
 
 	public String getSuite() {
-		return " of Diamonds";
+		return "Diamond";
 	}
 
 	public String getValue() {
